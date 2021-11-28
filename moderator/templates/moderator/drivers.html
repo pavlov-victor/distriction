@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Главная страница
+{% endblock %}
+
+{% block content %}
+
+    <div class="col py-3">
+        <h1>Водители</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID пользователя</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Лицензия</th>
+                <th scope="col">Номер телефона</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Действие</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for driver in object_list %}
+                <tr>
+                    <th scope="row">{{ driver.user.id }}</th>
+                    <td>{{ driver.user.first_name }} {{ driver.user.last_name }} {{ driver.user.patronymic }}</td>
+                    <td>{{ driver.carrier_license }}</td>
+                    <td>{{ driver.user.username }}</td>
+                    <td>
+                        {% if driver.is_active %}
+                            Активный
+                        {% else %}
+                            Заблокирован
+                        {% endif %}
+                    </td>
+                    <td><a href="{% url 'drivers-detail' driver.id %}" class="btn btn-success">Открыть</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

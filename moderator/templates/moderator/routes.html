@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Главная страница
+{% endblock %}
+
+{% block content %}
+
+    <div class="col py-3">
+        <h1>Позедки</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID пользователя</th>
+                <th scope="col">Откуда</th>
+                <th scope="col">Куда</th>
+                <th scope="col">Время начала</th>
+                <th scope="col">Время окончания</th>
+                <th scope="col">Общий заработок</th>
+                <th scope="col">Действие</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for route in object_list %}
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{ route.location_from }}</td>
+                    <td>{{ route.location_to }}</td>
+                    <td>{{ route.start }}</td>
+                    <td>{{ route.finish }}</td>
+                    <td>{{ route.total_price }}</td>
+                    <td><a href="#" class="btn btn-success">Открыть</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

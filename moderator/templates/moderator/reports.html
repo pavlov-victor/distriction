@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Главная страница
+{% endblock %}
+
+{% block content %}
+
+    <div class="col py-3">
+        <h1>Жалобы</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Номер заявки</th>
+                <th scope="col">Водитель</th>
+                <th scope="col">Текст жалобы</th>
+                <th scope="col">Пассажир</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for report in object_list %}
+               <tr>
+                <th scope="row">1</th>
+                <td><a href="{% url 'drivers-detail' report.driver.id %}">{{ report.driver.user.first_name }} {{ report.driver.user.last_name }}</a></td>
+                <td>{{ report.text }}</td>
+                <td><a href="#">{{ report.user.first_name }} {{ report.user.last_name }}</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

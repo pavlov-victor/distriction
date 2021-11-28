@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Водитель
+{% endblock %}
+
+{% block content %}
+    <div class="" style="max-width: 75%">
+        <div class="row mt-4">
+            <div class="col-sm-3 border-right">
+                <h2>Данные пользователя</h2>
+                <hr>
+                <p> Имя
+                    водителя: {{ object.user.first_name }} {{ object.user.last_name }} {{ object.user.patronymic }} </p>
+                <p> Телефон: {{ object.user.username }} </p>
+            </div>
+            <div class="col-sm-3 border-right">
+                <h2>Данные водителя</h2>
+                <hr>
+                <div class="">
+                    <a href="
+https://mintrans.sakha.gov.ru/utable/front/report/?UtableReport%5Bnum_reestr%5D={{ object.carrier_license }}&UtableReport%5Bdate_send%5D=&UtableReport%5Bportal%5D=&UtableReport%5Bgos_reg_znak%5D=&UtableReport%5Btitle%5D=&UtableReport%5Bdate_reestr%5D=&UtableReport%5Bnum_utable%5D=&UtableReport%5Bseriya%5D=&UtableReport%5Bmarka_ts%5D=&UtableReport%5Bmodel_ts%5D=&UtableReport%5Bdate_priostanova%5D=&UtableReport%5Bsrok_priostanova%5D=&UtableReport%5Bdate_annulir%5D=&UtableReport%5Bprichina_annul%5D=&UtableReport%5Bosobie_metki%5D=&UtableReport_page=1&ajax=yw0">
+                        Лицензия: {{ object.carrier_license }}
+                    </a>
+                </div>
+                <div class="">
+                    Опыт вождения: {{ object.driving_experience }}
+                </div>
+                <div>
+                    Водительские права: {{ object.driver_license }}
+                </div>
+                <div class="">
+                    Статус: {% if object.is_active %} Активный {% else %} Заблокирован {% endif %}
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <h2>Данные машины</h2>
+                <hr>
+                <div class="">Марка: {{ object.car.make }}</div>
+                <div class="">Госномер: {{ object.car.number }}</div>
+                <div class="">Количество мест: {{ object.car.places }}</div>
+                <div class="">Количество детских мест: {{ object.car.kids }}</div>
+                <div class="">Номер осаго: {{ object.car.osago }}</div>
+                <div class="">Начало осаго: {{ object.car.osago_start }}</div>
+                <div class="">Окончание осаго: {{ object.car.osago_finish }}</div>
+            </div>
+        </div>
+        <div class="">
+            {% if object.is_active %}
+                <a href="{% url 'drivers-change_status' object.id %}" class="btn btn-danger">Заблокировать</a>
+            {% else %}
+                <a href="{% url 'drivers-change_status' object.id %}" class="btn btn-success">Разблокировать</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
